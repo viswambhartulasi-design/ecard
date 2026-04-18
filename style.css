@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Roboto', sans-serif;
+}
+
+.card {
+    width: 340px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.6);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card h1 {
+    color: #fff;
+    font-size: 24px;
+}
+
+.title {
+    color: #cbd5e1;
+    margin-bottom: 25px;
+}
+.call-link:hover {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+}
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-item a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,0.12);
+    transition: 0.3s;
+}
+
+.contact-item a:hover {
+    transform: scale(1.05);
+}
+
+.contactcard-link:hover {
+    background: linear-gradient(135deg,#06b6d4,#2563eb);
+}
+
+.share-link:hover {
+    background: linear-gradient(135deg,#10b981,#06b6d4);
+}
+
+.whatsapp-link:hover {
+    background: #25D366;
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
+}
+
+.linkedin:hover {
+    background: #0A66C2;
+}
+
+/* FORM */
+.form-container {
+    margin-top: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+}
+
+.form-container h3 {
+    color: white;
+}
+
+.form-subtext {
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+.form-container input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.12);
+    color: white;
+}
+
+.form-container input::placeholder {
+    color: #cbd5e1;
+}
+
+.form-container button {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg,#06b6d4,#2563eb);
+    color: white;
+    cursor: pointer;
+}

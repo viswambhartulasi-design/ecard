@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Business Card</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="card">
+
+    <div class="profile-photo">
+        <img src="./prof.jpg" alt="Profile Photo">
+    </div>
+
+    <h1>Tulasi Viswambhar</h1>
+    <p class="title">Student | SRM University</p>
+
+    <div class="contacts">
+
+        <div class="contact-item">
+                <a href="tel:+917675969791" class="call-link">
+                    <i class="fas fa-phone icon"></i>
+                        Call Me
+                </a>
+        </div>
+
+        <div class="contact-item">
+            <a href="#" onclick="toggleForm()" class="share-link">
+                <i class="fas fa-share icon"></i>
+                Share Your Contact
+            </a>
+        </div>
+
+        <div class="contact-item">
+            <a href="https://wa.me/917675969791" class="whatsapp-link">
+                <i class="fab fa-whatsapp icon"></i>
+                WhatsApp Message
+            </a>
+        </div>
+
+        <div class="contact-item">
+            <a href="https://www.instagram.com/viswambhar.tulasi" target="_blank" class="social-link">
+                <i class="fab fa-instagram icon"></i>
+                Instagram
+            </a>
+        </div>
+
+        <div class="contact-item">
+            <a href="https://www.linkedin.com/in/viswambhar-tulasi-294709324/" target="_blank" class="social-link linkedin">
+                <i class="fab fa-linkedin icon"></i>
+                LinkedIn
+            </a>
+        </div>
+
+    </div>
+
+    <!-- FORM -->
+    <div id="contactForm" class="form-container">
+        <h3>Share Your Contact</h3>
+        <p class="form-subtext">Your details will be shared securely</p>
+
+        <input type="text" id="name" placeholder="👤 Your Name">
+        <input type="text" id="phone" placeholder="📱 Phone Number">
+
+        <button onclick="saveContact()">Submit</button>
+    </div>
+
+</div>
+
+<!-- FIREBASE SCRIPT -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCk2sBKJKWA9CBtmXTkDelGfzbTVWRPc8M",
+  authDomain: "nfc-card-app-648c1.firebaseapp.com",
+  projectId: "nfc-card-app-648c1",
+  storageBucket: "nfc-card-app-648c1.firebasestorage.app",
+  messagingSenderId: "908909725674",
+  appId: "1:908909725674:web:4cab606940343d41a91493"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// FUNCTIONS
+window.toggleForm = function () {
+    const form = document.getElementById("contactForm");
+    form.style.display = form.style.display === "flex" ? "none" : "flex";
+};
+
+window.downloadContact = function () {
+    const vcard = `
+BEGIN:VCARD
+VERSION:3.0
+FN:Tulasi Viswambhar
+TEL:917675969791
+END:VCARD`;
+
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "contact.vcf";
+    a.click();
+};
+
+window.saveContact = async function () {
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    if (!name || !phone) {
+        alert("Enter all details");
+        return;
+    }
+
+    try {
+        await addDoc(collection(db, "contacts"), {
+            name,
+            phone,
+            time: new Date()
+        });
+
+        alert("Saved to cloud 🚀");
+
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+
+    } catch (error) {
+        console.error(error);
+        alert("Error saving contact");
+    }
+};
+
+</script>
+
+</body>
+</html>
